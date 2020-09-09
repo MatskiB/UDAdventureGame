@@ -3,7 +3,7 @@ import random
 import fantasy_list
 
 # Below is a function that helps print statements with a chosen time delay
-# deliberately omitting the ability to specify the length of time in then
+# deliberately omitting the ability to specify the length of time in the
 # function call because, for some reason, I couldn't get it work in
 # gitbash
 
@@ -30,24 +30,24 @@ def intro():
 # and then runs the relevant function for that
 
 
-def path(backpack):
+def path(backpack, monster):
     print_pause("Enter 1 to knock on the door of the house")
     print_pause("Enter 2 to peer into the cave.")
     response = input("What would you like to do?\n"
                      "(Please enter 1 or 2)\n")
     if "1" in response:
-        house(backpack)
+        house(backpack, monster)
     elif "2" in response:
-        cave(backpack)
+        cave(backpack, monster)
     else:
         print_pause("Computer says no. Please try again")
-        path(backpack)
+        path(backpack, monster)
+
+# This is the fight scene with different scenarios
 
 
-def fight(backpack):
-    monster = random.choice(fantasy_list.monsters)
+def fight(backpack, monster):
     if "sword" in backpack:
-        global monster
         answer = input("Would you like to (1) fight or (2) run away?\n")
         # This will lead to victory
         if "1" in answer:
@@ -64,10 +64,10 @@ def fight(backpack):
         if "2" in answer:
             print_pause("You run back into the field. "
                         "Luckily, you don't seem to have been followed.\n")
-            path(backpack)
+            path(backpack, monster)
         else:
             print_pause("Please try this again")
-            fight()
+            fight(backpack, monster)
     else:
         # This path will give the player a choice to fight using their rusty
         # weapon or run away and find the sword
@@ -85,38 +85,36 @@ def fight(backpack):
         if "2" in answer:
             print_pause("You run back into the open field. "
                         "Luckily, you don't seem to have been followed.\n")
-            path(backpack)
+            path(backpack, monster)
         else:
             print_pause("Please try this again")
-            house(backpack)
+            house(backpack, monster)
 
 
-def house(backpack):
-    # This variable randomly assigns an opponent
-    global monster
+def house(backpack, monster):
     print_pause("You approach the door of the house.")
     print_pause("You are about to knock when the door opens and "
                 "out steps a " + str(monster) + ".")
     print_pause("Eep! This is " + str(monster) + "'s house.")
     print_pause("The " + str(monster) + " attacks you!")
-    fight(backpack)
+    fight(backpack, monster)
 
 
 # Below functions handles what happens when
 # the player chooses to go to the cave
 
 
-def cave(backpack):
+def cave(backpack, monster):
     # This variable randomly assigns the weapon
     weapon = random.choice(fantasy_list.weapons)
-    # This path handles cases where the player has resturned to the cave
+    # This path handles cases where the player has returned to the cave
     # for some reason
     if "sword" in backpack:
         print_pause("You peer cautiously into the cave.")
         print_pause("You've been here before and gotten all the good stuff "
                     "It's just an empty cave now.")
         print_pause("You walk back out to the field.\n")
-        path()
+        path(backpack, monster)
     # By following this path, the player will discover their new weapon
     # and the programme will add it to the backpack list
     else:
@@ -128,7 +126,7 @@ def cave(backpack):
         print_pause("You discard your silly old dagger "
                     "and take the sword with you.")
         print_pause("You run back out into the field.\n")
-        path(backpack)
+        path(backpack, monster)
 
 # This function allows the player to decided if they want to play again
 
@@ -151,7 +149,8 @@ def play_again():
 
 def play_game():
     backpack = []
+    monster = random.choice(fantasy_list.monsters)
     intro()
-    path(backpack)
+    path(backpack, monster)
 
 play_game()
