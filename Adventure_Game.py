@@ -3,6 +3,9 @@ import random
 import fantasy_list
 
 # Below is a function that helps print statements with a chosen time delay
+# deliberately omitting the ability to specify the length of time in then
+# function call because, for some reason, I couldn't get it work in
+# gitbash
 
 
 def print_pause(statement):
@@ -41,19 +44,10 @@ def path(backpack):
         path(backpack)
 
 
-# This function handles what happens if the player chooses to go to the house
-
-
-def house(backpack):
-    # This variable randomly assigns an opponent
+def fight(backpack):
     monster = random.choice(fantasy_list.monsters)
-    print_pause("You approach the door of the house.")
-    print_pause("You are about to knock when the door opens and "
-                "out steps a " + str(monster) + ".")
-    print_pause("Eep! This is " + str(monster) + "'s house.")
-    print_pause("The " + str(monster) + " attacks you!")
-    # This path assumes the player has visited the cave already
     if "sword" in backpack:
+        global monster
         answer = input("Would you like to (1) fight or (2) run away?\n")
         # This will lead to victory
         if "1" in answer:
@@ -72,7 +66,8 @@ def house(backpack):
                         "Luckily, you don't seem to have been followed.\n")
             path(backpack)
         else:
-            print_pause("Please choose (1) or (2)")
+            print_pause("Please try this again")
+            fight()
     else:
         # This path will give the player a choice to fight using their rusty
         # weapon or run away and find the sword
@@ -92,7 +87,20 @@ def house(backpack):
                         "Luckily, you don't seem to have been followed.\n")
             path(backpack)
         else:
-            print_pause("Please choose (1) or (2)")
+            print_pause("Please try this again")
+            house(backpack)
+
+
+def house(backpack):
+    # This variable randomly assigns an opponent
+    global monster
+    print_pause("You approach the door of the house.")
+    print_pause("You are about to knock when the door opens and "
+                "out steps a " + str(monster) + ".")
+    print_pause("Eep! This is " + str(monster) + "'s house.")
+    print_pause("The " + str(monster) + " attacks you!")
+    fight(backpack)
+
 
 # Below functions handles what happens when
 # the player chooses to go to the cave
