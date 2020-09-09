@@ -37,6 +37,7 @@ def path(backpack):
     elif "2" in response:
         cave(backpack)
     else:
+        print_pause("Computer says no. Please try again")
         path(backpack)
 
 
@@ -56,7 +57,7 @@ def house(backpack):
         answer = input("Would you like to (1) fight or (2) run away?\n")
         # This will lead to victory
         if "1" in answer:
-            print_pause("As the "+ str(monster) + " moves to attack you, "
+            print_pause("As the " + str(monster) + " moves to attack you, "
                         "you unsheath your new sword.")
             print_pause("Your new sword shines brightly in your hand "
                         "as you brace yourself for the attack.")
@@ -70,6 +71,8 @@ def house(backpack):
             print_pause("You run back into the field. "
                         "Luckily, you don't seem to have been followed.\n")
             path(backpack)
+        else:
+            print_pause("Please choose (1) or (2)")
     else:
         # This path will give the player a choice to fight using their rusty
         # weapon or run away and find the sword
@@ -88,8 +91,11 @@ def house(backpack):
             print_pause("You run back into the open field. "
                         "Luckily, you don't seem to have been followed.\n")
             path(backpack)
+        else:
+            print_pause("Please choose (1) or (2)")
 
-# Below functions handles what happens when the player chooses to go to the cave
+# Below functions handles what happens when
+# the player chooses to go to the cave
 
 
 def cave(backpack):
@@ -128,6 +134,9 @@ def play_again():
     if "y" in answer:
         print_pause("Excellent! Restarting the game.\n")
         play_game()
+    else:
+        print_pause("This was a simple question "
+                    "Please try again.")
 
 # This function wraps everything into a simple play_game command
 
