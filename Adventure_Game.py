@@ -61,7 +61,7 @@ def fight(backpack, monster):
             play_again()
         # This will lead the player back to the original choice
         # but has no effect on the outcome of the game
-        if "2" in answer:
+        elif "2" in answer:
             print_pause("You run back into the field. "
                         "Luckily, you don't seem to have been followed.\n")
             path(backpack, monster)
@@ -82,7 +82,7 @@ def fight(backpack, monster):
             print_pause("You have been defeated.")
             play_again()
         # This path saves the player and allows them to make a better choice
-        if "2" in answer:
+        elif "2" in answer:
             print_pause("You run back into the open field. "
                         "Luckily, you don't seem to have been followed.\n")
             path(backpack, monster)
@@ -143,6 +143,7 @@ def play_again():
     else:
         print_pause("This was a simple question "
                     "Please try again.")
+        play_again()
 
 # This function wraps everything into a simple play_game command
 
