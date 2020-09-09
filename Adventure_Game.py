@@ -137,7 +137,7 @@ def play_again():
     if "n" in answer:
         print_pause("Thanks for playing! See you next time.")
     # This will restart the game from scratch
-    if "y" in answer:
+    elif "y" in answer:
         print_pause("Excellent! Restarting the game.\n")
         play_game()
     else:
