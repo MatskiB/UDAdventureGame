@@ -3,9 +3,6 @@ import random
 import fantasy_list
 
 # Below is a function that helps print statements with a chosen time delay
-# deliberately omitting the ability to specify the length of time in the
-# function call because, for some reason, I couldn't get it work in
-# gitbash
 
 
 def print_pause(statement, t):
